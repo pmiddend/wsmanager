@@ -34,6 +34,17 @@ executable wsmanager
                      , directory
                      , safe
                      , parsec
+                     , aeson
+                     , MonadCatchIO-transformers >= 0.2.1 && < 0.4
+                     , mtl                       >= 2     && < 3
+                     , snap-core                 >= 0.9   && < 0.10
+                     , snap-server               >= 0.9   && < 0.10
+                     , snap-blaze
+                     , blaze-html
   hs-source-dirs:      src
   default-language:    Haskell2010
-  ghc-options: -Wall
+  if impl(ghc >= 6.12.0)
+    ghc-options: -threaded -Wall -fwarn-tabs -funbox-strict-fields -O2
+                 -fno-warn-unused-do-bind
+  else
+    ghc-options: -threaded -Wall -fwarn-tabs -funbox-strict-fields -O2
